@@ -34,4 +34,28 @@ describe('Form test', () => {
     })    
 
     // TODO: Add some test cases like CRUD, i.e. get, post, update, delete
+    it('should successfully get a empty list of Todos', async () =>{
+        const response = await server.inject({ 
+            method:'GET', 
+            url:'/api/todos'
+        })
+        
+        expect(response.statusCode).toBe(200)
+        expect(response.body).toStrictEqual(JSON.stringify({ todos:[]}))
+    })
+
+    it('should get todo item after input', async () => {
+        const response = await server.inject({
+            method: 'POST',
+            url: '/api/todos',
+            payload:{
+                name: 'clean',
+                description:'desk',
+                status: false
+            }
+        })
+    })
+
+    
+
 })
